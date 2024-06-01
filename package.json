@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "heroku-prebuild": "npm i && npm i --prefix server && npm i --prefix client",
+    "heroku-prebuild": "npm i && npm i --prefix server && npm i --prefix client && npm build --prefix client",
     "server": "npm start --prefix server",
     "client": "npm start --prefix client"
 
