@@ -5,9 +5,7 @@
   "scripts": {
     "heroku-prebuild": "npm i && npm i --prefix server && npm i --prefix client",
     "server": "npm start --prefix server",
-    "client": "npm start --prefix client",
-    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
-    "prod": "cd server && npm install && cd ../client && npm install && cd .. && npm start"
+    "client": "npm start --prefix client"
 
   },
   "keywords": [],

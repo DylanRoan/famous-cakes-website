@@ -1,1 +1,2 @@
-worker: npm run prod
+client: npm run client
+server: npm run server
