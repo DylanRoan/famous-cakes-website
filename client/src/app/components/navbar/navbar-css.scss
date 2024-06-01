@@ -1,0 +1,76 @@
+.navbar {
+    max-height: 100px;
+    height: 10vh;
+
+    background-color: white; 
+    box-shadow: 5px 10px 15px rgba(0, 0, 0, 0.1);
+
+    padding: 0 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+
+    > section.header {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+
+        height: inherit;
+
+        > a {
+            height: inherit;
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    img {
+        height: calc(100% - 20px);
+    }
+
+    > section.links {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 50px;
+
+        height: inherit;
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 50px;
+
+        height: inherit;
+
+        > li {
+            
+            display: flex;
+            align-items: center;
+
+            height: inherit;
+
+            > a {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+
+                height: inherit;
+
+                > svg {
+                    height: 30%;
+                }
+                
+                @media screen and (max-width: 480px) {
+                    span {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}

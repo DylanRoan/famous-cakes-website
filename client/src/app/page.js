@@ -1,95 +1,35 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import ProductsShowcase from './components/products-showcase/products-showcase';
 
-export default function Home() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+import './page.scss'
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+export default function HomePage () {
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  );
+    /* Dummy Data for Featured Cakes */
+    const test_data = [
+        {"name": "Cupcake", "type": "Sweets", "price": "12 AED / Piece", "id": "52152", "image": "https://scontent.ffjr1-1.fna.fbcdn.net/v/t39.30808-6/445436768_1068620634733928_4386343075900921374_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_ohc=AhzmhUUkPpIQ7kNvgEXGfXM&_nc_ht=scontent.ffjr1-1.fna&oh=00_AYAh7ieM2vFpGhGLfA84s0F4S58KsPqxVP3_peTk2CrnyA&oe=665D4D45"},
+        {"name": "Cupcake", "type": "Sweets", "price": "12 AED / Piece", "id": "52152",  "image": "https://scontent.ffjr1-1.fna.fbcdn.net/v/t39.30808-6/445436768_1068620634733928_4386343075900921374_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_ohc=AhzmhUUkPpIQ7kNvgEXGfXM&_nc_ht=scontent.ffjr1-1.fna&oh=00_AYAh7ieM2vFpGhGLfA84s0F4S58KsPqxVP3_peTk2CrnyA&oe=665D4D45"},
+        {"name": "Cupcake", "type": "Sweets", "price": "12 AED / Piece", "id": "52152",  "image": "https://scontent.ffjr1-1.fna.fbcdn.net/v/t39.30808-6/445436768_1068620634733928_4386343075900921374_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_ohc=AhzmhUUkPpIQ7kNvgEXGfXM&_nc_ht=scontent.ffjr1-1.fna&oh=00_AYAh7ieM2vFpGhGLfA84s0F4S58KsPqxVP3_peTk2CrnyA&oe=665D4D45"},
+        {"name": "Cupcake", "type": "Sweets", "price": "12 AED / Piece", "id": "52152",  "image": "https://scontent.ffjr1-1.fna.fbcdn.net/v/t39.30808-6/445436768_1068620634733928_4386343075900921374_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_ohc=AhzmhUUkPpIQ7kNvgEXGfXM&_nc_ht=scontent.ffjr1-1.fna&oh=00_AYAh7ieM2vFpGhGLfA84s0F4S58KsPqxVP3_peTk2CrnyA&oe=665D4D45"},
+        {"name": "Cupcake", "type": "Sweets", "price": "12 AED / Piece", "id": "52152",  "image": "https://scontent.ffjr1-1.fna.fbcdn.net/v/t39.30808-6/445436768_1068620634733928_4386343075900921374_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_ohc=AhzmhUUkPpIQ7kNvgEXGfXM&_nc_ht=scontent.ffjr1-1.fna&oh=00_AYAh7ieM2vFpGhGLfA84s0F4S58KsPqxVP3_peTk2CrnyA&oe=665D4D45"},
+        {"name": "Cupcake", "type": "Sweets", "price": "12 AED / Piece", "id": "52152",  "image": "https://scontent.ffjr1-1.fna.fbcdn.net/v/t39.30808-6/445436768_1068620634733928_4386343075900921374_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_ohc=AhzmhUUkPpIQ7kNvgEXGfXM&_nc_ht=scontent.ffjr1-1.fna&oh=00_AYAh7ieM2vFpGhGLfA84s0F4S58KsPqxVP3_peTk2CrnyA&oe=665D4D45"},
+        {"name": "Cupcake", "type": "Sweets", "price": "12 AED / Piece", "id": "52152",  "image": "https://scontent.ffjr1-1.fna.fbcdn.net/v/t39.30808-6/445436768_1068620634733928_4386343075900921374_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_ohc=AhzmhUUkPpIQ7kNvgEXGfXM&_nc_ht=scontent.ffjr1-1.fna&oh=00_AYAh7ieM2vFpGhGLfA84s0F4S58KsPqxVP3_peTk2CrnyA&oe=665D4D45"},
+        {"name": "Cupcake", "type": "Sweets", "price": "12 AED / Piece", "id": "52152",  "image": "https://scontent.ffjr1-1.fna.fbcdn.net/v/t39.30808-6/445436768_1068620634733928_4386343075900921374_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_ohc=AhzmhUUkPpIQ7kNvgEXGfXM&_nc_ht=scontent.ffjr1-1.fna&oh=00_AYAh7ieM2vFpGhGLfA84s0F4S58KsPqxVP3_peTk2CrnyA&oe=665D4D45"}
+    ]
+    
+    return (
+        <main id='homepage'>
+            <section className='banner'>
+            <video loop autoPlay muted={true}>
+                <source src="/coffee.mp4" type="video/mp4" />
+            </video>
+            </section>
+            <article>
+                <h1>Cakes</h1>
+                <ProductsShowcase data={test_data} />
+                <aside>
+                    
+                </aside>
+            </article>
+        </main>
+    );
 }

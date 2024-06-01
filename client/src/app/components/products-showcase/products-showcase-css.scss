@@ -1,0 +1,35 @@
+section.products-showcase {
+    max-width: 60vw;
+
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    overflow: hidden;
+    padding: 25px;
+
+    > a {
+        height: 300px;
+        width: 200px;
+        
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        color: black;
+        
+        text-decoration: none;
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.3), /* Top shadow */
+                 0px 0px 10px rgba(0,0,0,0.3), /* Right shadow */
+                -0px 0px 10px rgba(0,0,0,0.3), /* Bottom shadow */
+                0px 0px 10px rgba(0,0,0,0.3); /* Left shadow */
+
+        > img {
+            width: 100%;
+            
+        }
+        
+    }
+}
