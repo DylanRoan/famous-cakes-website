@@ -1,2 +1,1 @@
-web: npm run client
-web: npm run server
+web: npm run prod

@@ -1,18 +1,24 @@
 {
-  "name": "famous-cakes-website",
-  "version": "1.0.0",
-  "main": "index.js",
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "heroku-prebuild": "npm i && npm i --prefix server && npm i --prefix client && npm run build --prefix client",
-    "server": "npm start --prefix server",
-    "client": "npm start --prefix client"
-
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "prod": "next start -p $PORT"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
-    "concurrently": "^8.2.2"
+    "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@fortawesome/free-brands-svg-icons": "^6.5.2",
+    "@fortawesome/free-regular-svg-icons": "^6.5.2",
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "next": "14.2.3",
+    "pg": "^8.11.5",
+    "react": "^18",
+    "react-dom": "^18",
+    "sass": "^1.77.4"
   }
 }
