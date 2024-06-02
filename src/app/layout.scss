@@ -24,6 +24,8 @@ body {
 
 main {
     min-height: calc(100vh - 100px);
+    padding: 50px;
+    @media screen and (max-width: 480px) { padding: 25px; }
 }
 
 @media (max-width: 480px) {

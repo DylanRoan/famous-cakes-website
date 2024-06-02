@@ -1,0 +1,66 @@
+main#menu {
+    display: flex;
+    gap: 50px;
+
+    > section.menu-items {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        padding: 25px;
+
+        > aside {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+
+            > div {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 50px;
+
+                > a {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                    align-items: center;
+                    width: 150px;
+
+                    @media screen and (max-width: 480px) {
+                        width: 100px;
+                    }
+
+                    > img {
+                        width: inherit;
+                        aspect-ratio: 1 / 1;
+                        object-fit: cover;
+                        border-radius: 100%;
+                    } 
+                }
+            }
+        }
+    }
+
+    > section.menu-list 
+    {
+        display: flex;
+        flex-direction: column;
+        padding: 25px;
+        gap: 25px;
+
+        @media screen and (max-width: 480px) {
+            display: none;
+        }
+
+        > aside {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+
+            > div {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+    }
+}

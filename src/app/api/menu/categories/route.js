@@ -1,10 +1,10 @@
-import { get } from '@//database/menu'
+import { categories } from '@//database/menu'
 import { NextResponse } from 'next/server'
  
 let res = NextResponse
 export async function GET(req, ctx) {
 
-  let result = await get()
+  let result = await categories(true)
 
   if (result) 
     return res.json(result.rows)

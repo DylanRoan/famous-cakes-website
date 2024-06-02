@@ -1,0 +1,96 @@
+main#product-manager {
+
+    > h1 {
+        text-align: center;
+    }
+
+    > nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+
+        > svg {
+            cursor: pointer;
+        }
+    }
+
+    > section {
+        display: flex;
+        justify-content: center;
+        max-height: 60vh;
+
+        @media screen and (max-width: 480px) {
+            flex-direction: column;
+        }
+
+        > aside {
+            flex: 1;
+            max-width: 50%;
+            @media screen and (max-width: 480px) {
+                max-width: 100%;
+            }
+        }
+
+        aside.pm-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+
+            img {
+                border-radius: 25px;
+                width: 50%;
+            }
+
+            > form {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+
+                > div {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 10px;
+
+                    > input {
+                        border: solid black 1px;
+                        padding: 5px 10px;
+                        background-color: inherit;
+                    }
+                }
+            }
+        }
+
+        aside.pm-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            overflow-y: scroll;
+
+            > button {
+                height: 200px;
+                background-color: white;
+                border-radius: 25px;
+
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+
+                cursor: pointer;
+                transition: border-color ease-in-out 0.2s;
+                &:hover {
+                    border-color: pink;
+                }
+            }
+            
+            img {
+                height: 80%;
+            }
+        }
+    }
+}

@@ -1,6 +1,15 @@
+import { add } from '@//database/menu'
 import { NextResponse } from 'next/server'
  
 let res = NextResponse
-export async function GET(req, ctx) {
-  return res.json({ message: '42.' })
+export async function POST(req) {
+  const stream = await req.body
+  const body = await new Response(stream).json()
+
+  let required = ["item_name", "category", "description", "price", "image_link", "featured"]
+  if (Object.keys(body).every((e, i) => e != required[i])) return res.json({"message": "Invalid form."})
+
+  await add(body)
+
+  return res.json({test: "Success"})
 }
