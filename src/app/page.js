@@ -15,7 +15,7 @@ export default async function HomePage () {
             <article>
                 <h1>Featured Items</h1>
                 {
-                    await fetch(process.env.API_URL + '/api/menu/featured', {
+                    await fetch(process.env.API_URL + '/api/menu/featured', {cache: 'no-store'}, {
                         cache: "no-store",
                       })
                     .then(response => response.json())

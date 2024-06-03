@@ -1,5 +1,6 @@
 import { get } from '@//database/menu'
 import { NextResponse } from 'next/server'
+export const dynamic = 'force-dynamic'
  
 let res = NextResponse
 export async function GET(req, ctx) {

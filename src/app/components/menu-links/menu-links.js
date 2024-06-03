@@ -6,7 +6,7 @@ async function MenuLinks ({category}) {
             <Link href={`#${category.replace(/ /g, '')}_header`}><h4>{category}</h4></Link>
             <div>
                 {
-                    await fetch(process.env.API_URL + '/api/menu/category-items?category=' + category.replace(/ /g, "%20"))
+                    await fetch(process.env.API_URL + '/api/menu/category-items?category=' + category.replace(/ /g, "%20"), {cache: 'no-store'})
                     .then(response => response.json())
                     .then(data => 
                         data.map((o, i) => 

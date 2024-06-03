@@ -12,17 +12,14 @@ export default function Menu () {
     const [addState, setAddState] = useState(false);
     const [removeState, setRemoveState] = useState(false);
 
-    function fetchItems() {
-        useEffect(async () => {
-            
-            await fetch(process.env.API_URL + '/api/menu/get')
-             .then(response => response.json())
-             .then(data => setItems(data))
-             .catch(error => console.error('Error:', error));
-          }, []);
-    }
 
-    fetchItems()
+    useEffect(async () => {
+        
+        await fetch(process.env.API_URL + '/api/menu/get', {cache: 'no-store'})
+            .then(response => response.json())
+            .then(data => setItems(data))
+            .catch(error => console.error('Error:', error));
+    }, []);
 
     function resetStates() {
         setAddState(false)
@@ -52,6 +49,7 @@ export default function Menu () {
         }
         
         const response = await fetch(process.env.API_URL + '/api/menu/' + ((selectedItem) ? 'edit' : 'add'), {
+            cache: 'no-store',
             method: 'POST',
             headers: {
             'Accept': 'application/json',
@@ -60,7 +58,7 @@ export default function Menu () {
             body: `${JSON.stringify(data)}`
         })
 
-        await fetch(process.env.API_URL + '/api/menu/get')
+        await fetch(process.env.API_URL + '/api/menu/get', {cache: 'no-store'})
         .then(response => response.json())
         .then(data => setItems(data))
         .catch(error => console.error('Error:', error))
@@ -72,6 +70,7 @@ export default function Menu () {
         }
         
         const response = await fetch(process.env.API_URL + '/api/menu/remove', {
+            cache: 'no-store',
             method: 'POST',
             headers: {
             'Accept': 'application/json',
@@ -80,7 +79,9 @@ export default function Menu () {
             body: `${JSON.stringify(data)}`
         })
 
-        await fetch(process.env.API_URL + '/api/menu/get')
+        setSelectedItem(null)
+
+        await fetch(process.env.API_URL + '/api/menu/get', {cache: 'no-store'})
         .then(response => response.json())
         .then(data => setItems(data))
         .catch(error => console.error('Error:', error))

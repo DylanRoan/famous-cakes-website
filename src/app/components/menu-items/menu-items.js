@@ -6,7 +6,7 @@ async function MenuItems ({category}) {
             <h2 id={`${category.replace(/ /g, '')}_header`}>{category}</h2>
             <div>
                 {
-                    await fetch(process.env.API_URL + '/api/menu/category-items?category=' + category.replace(/ /g, "%20"))
+                    await fetch(process.env.API_URL + '/api/menu/category-items?category=' + category.replace(/ /g, "%20"), {cache: 'no-store'})
                     .then(response => response.json())
                     .then(data => 
                         data.map((o, i) => 
