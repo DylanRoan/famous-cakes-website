@@ -7,7 +7,15 @@ main#homepage {
       width: 100%;
       height: 200px;
 
+      @media screen and (max-width: 480px) {
+        height: 100px;
+      }
+
       overflow: hidden;
+
+      > video {
+        width: 100%;
+      }
   }
 
   > article {

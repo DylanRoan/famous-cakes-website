@@ -9,5 +9,5 @@ export async function GET(req, ctx) {
   if (result) 
     return res.json(result.rows)
   else
-    return res.error()
+    return res.json({error: 'Unable to give result.'})
 }

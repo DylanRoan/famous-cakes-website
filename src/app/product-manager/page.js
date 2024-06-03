@@ -30,12 +30,13 @@ export default function Menu () {
         setRemoveState(false)
     }
 
-    const addItemSubmit = async (e) => {
+    const itemSubmit = async (e) => {
         e.preventDefault()
         const formURL = e.target.action
         const formData = new FormData(e.currentTarget)
 
         const data = {
+            id: (selectedItem) ? selectedItem.id : null,
             item_name: formData.get("item_name"),
             category: formData.get("category"),
             description: formData.get("description"),
@@ -44,9 +45,33 @@ export default function Menu () {
             featured: formData.get("featured")
         }
 
-        console.log(JSON.stringify(data))
+        if (selectedItem)
+        {
+            if (data.image_link == '') data.image_link = selectedItem.image_link
+            if (data.description == '') data.description = selectedItem.description
+        }
+        
+        const response = await fetch(process.env.API_URL + '/api/menu/' + ((selectedItem) ? 'edit' : 'add'), {
+            method: 'POST',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+            },
+            body: `${JSON.stringify(data)}`
+        })
 
-        const response = await fetch(process.env.API_URL + '/api/menu/add', {
+        fetch(process.env.API_URL + '/api/menu/get')
+        .then(response => response.json())
+        .then(data => setItems(data))
+        .catch(error => console.error('Error:', error))
+    }
+
+    async function removeItem() {
+        const data = {
+            id: selectedItem.id
+        }
+        
+        const response = await fetch(process.env.API_URL + '/api/menu/remove', {
             method: 'POST',
             headers: {
             'Accept': 'application/json',
@@ -65,13 +90,13 @@ export default function Menu () {
         <main id='product-manager'>
             <h1>Product Manager</h1>
             <nav>
-                <FontAwesomeIcon icon={faAdd} size='2x' onClick={() => {resetStates(); setAddState(true); setSelectedItem(false)}}></FontAwesomeIcon>
-                {selectedItem && (<FontAwesomeIcon icon={faEdit} size='2x'></FontAwesomeIcon>)}
-                {selectedItem && (<FontAwesomeIcon icon={faRemove} size='2x'></FontAwesomeIcon>)}
+                {!addState && (<FontAwesomeIcon icon={faAdd} size='2x' onClick={() => {resetStates(); setAddState(true); setSelectedItem(false)}}></FontAwesomeIcon>)}
+                {selectedItem && !editState && (<FontAwesomeIcon icon={faEdit} size='2x' onClick={() => {resetStates(); setEditState(true)}}></FontAwesomeIcon>)}
+                {selectedItem && !removeState && (<FontAwesomeIcon icon={faRemove} size='2x' onClick={() => {resetStates(); setRemoveState(true)}}></FontAwesomeIcon>)}
             </nav>
             <section>
                 {
-                    selectedItem && (
+                    (selectedItem && !editState) && (
                         <aside className='pm-item'>
                             <h2>{selectedItem.item_name}</h2>
                             <h3>{selectedItem.category}</h3>
@@ -79,40 +104,45 @@ export default function Menu () {
                             <p>{selectedItem.description}</p>
                             <p>{selectedItem.price} AED</p>
                             <p>Featured: {(selectedItem.featured) ? 'Yes' : 'No'}</p>
+
+                            {
+                                removeState && (
+                                    <button onClick={() => removeItem()}>Confirm Item Removal</button>
+                                )
+                            }
                         </aside>
                     )
                 }
                 {
-                    addState && (
+                    (addState || editState) && (
                         <aside className='pm-item'>
-                            <form onSubmit={addItemSubmit}>
+                            <form onSubmit={itemSubmit}>
                                 <div>
                                     <label for='item_name'>Name</label>
-                                    <input type='text' name='item_name' required></input>
+                                    <input type='text' name='item_name' required placeholder={(selectedItem) ? selectedItem.item_name : ''}></input>
                                 </div>
                                 <div>
                                     <label for='category'>Category</label>
-                                    <input type='text' name='category' required></input>
+                                    <input type='text' name='category' required placeholder={(selectedItem) ? selectedItem.category : ''}></input>
                                 </div>
                                 <div>
                                     <label for='description'>Description</label>
-                                    <input type='text' name='description'></input>
+                                    <input type='text' name='description' placeholder={(selectedItem) ? selectedItem.description : ''}></input>
                                 </div>
                                 <div>
                                     <label for='price'>Price</label>
-                                    <input type='number' name='price' required></input>
+                                    <input type='number' name='price' required placeholder={(selectedItem) ? selectedItem.price : ''}></input>
                                 </div>
                                 <div>
                                     <label for='image_link'>Image URL</label>
-                                    <input type='text' name='image_link'></input>
+                                    <input type='text' name='image_link' placeholder={(selectedItem) ? selectedItem.image_link : ''}></input>
                                 </div>
                                 <div>
                                     <label for='featured'>Featured</label>
-                                    <input type='checkbox' name='featured'></input>
+                                    <input type='checkbox' name='featured' defaultChecked={(selectedItem) ? selectedItem.featured : false}></input>
                                 </div>
                                 <div>
                                     <button type="submit">Submit</button>
-
                                 </div>
                             </form>
                         </aside>

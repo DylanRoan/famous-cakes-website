@@ -19,7 +19,7 @@ main#product-manager {
     > section {
         display: flex;
         justify-content: center;
-        max-height: 60vh;
+        gap: 25px;
 
         @media screen and (max-width: 480px) {
             flex-direction: column;
@@ -28,6 +28,7 @@ main#product-manager {
         > aside {
             flex: 1;
             max-width: 50%;
+
             @media screen and (max-width: 480px) {
                 max-width: 100%;
             }
@@ -40,9 +41,20 @@ main#product-manager {
             justify-content: center;
             gap: 10px;
 
+            > button {
+                padding: 10px;
+                border-radius: 10px;
+                border: 1px solid black;
+                background-color: inherit;
+                cursor: pointer;
+            }
+
             img {
                 border-radius: 25px;
-                width: 50%;
+                width: 30%;
+                aspect-ratio: 1 / 1;
+                object-fit: cover;
+                border-radius: 100%;
             }
 
             > form {
@@ -69,12 +81,16 @@ main#product-manager {
             display: flex;
             flex-direction: column;
             gap: 20px;
+            max-height: 60vh;
 
             overflow-y: scroll;
 
             > button {
                 height: 200px;
-                background-color: white;
+                @media screen and (max-width: 480px) {
+                    height: 150px;
+                }
+                background-color: inherit;
                 border-radius: 25px;
 
                 display: flex;
@@ -90,6 +106,9 @@ main#product-manager {
             
             img {
                 height: 80%;
+                aspect-ratio: 1 / 1;
+                object-fit: cover;
+                border-radius: 100%;
             }
         }
     }

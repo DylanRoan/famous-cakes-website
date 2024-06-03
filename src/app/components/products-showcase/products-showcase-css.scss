@@ -28,8 +28,21 @@ section.products-showcase {
 
         > img {
             width: 100%;
-            
+            height: 50%;
+            object-fit: cover;
+        }
+
+        > div {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 15px;
+            text-align: center;
         }
         
+    }
+
+    .no-items-showcase {
+        text-align: center;
     }
 }

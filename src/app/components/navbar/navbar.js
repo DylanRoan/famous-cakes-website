@@ -16,7 +16,7 @@ const Navbar = () => {
             <section className='links'>
                 <ul className="navbar-nav">
                     <li><Link href="/contact"><FontAwesomeIcon icon={faLocationDot} size="lg" /> <span>Find Us</span></Link></li>
-                    <li><Link href="/profile"><FontAwesomeIcon icon={faUser} size="lg" /> <span className='Log in'>Profile</span></Link></li>
+                    {/*<li><Link href="/profile"><FontAwesomeIcon icon={faUser} size="lg" /> <span className='Log in'>Profile</span></Link></li>*/}
                 </ul>
             </section>
       </nav>

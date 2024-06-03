@@ -9,11 +9,11 @@ export default async function HomePage () {
         <main id='homepage'>
             <section className='banner'>
             <video loop autoPlay muted={true}>
-                <source src="/coffee.mp4" type="video/mp4" />
+                <source src="/cake.mp4" type="video/mp4" />
             </video>
             </section>
             <article>
-                <h1>Cakes</h1>
+                <h1>Featured Items</h1>
                 {
                     fetch(process.env.API_URL + '/api/menu/featured', {
                         cache: "no-store",
