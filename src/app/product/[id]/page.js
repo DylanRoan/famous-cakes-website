@@ -6,19 +6,19 @@ import './page.scss'
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
-export default function ProductPage ({params: {id}}) {
+export default async function ProductPage ({params: {id}}) {
     const [product, setProduct] = useState([]);
     const [featuredItems, setFeatured] = useState([]);
 
-    useEffect(() => {
-        fetch(process.env.API_URL + '/api/menu/product?id=' + id, {
+    useEffect(async () => {
+        await fetch(process.env.API_URL + '/api/menu/product?id=' + id, {
             cache: "no-store",
           })
         .then(response => response.json())
         .then(data => setProduct(data))
         .catch(error => console.error('Error:', error));
 
-        fetch(process.env.API_URL + '/api/menu/featured', {
+        await fetch(process.env.API_URL + '/api/menu/featured', {
             cache: "no-store",
           })
         .then(response => response.json())

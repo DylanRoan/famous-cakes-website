@@ -7,13 +7,13 @@ import MenuItems from '../components/menu-items/menu-items';
 import MenuLinks from '../components/menu-links/menu-links';
 import Link from 'next/link';
 
-export default function Menu () {
+export default async function Menu () {
     
     return (
         <main id='menu'>
             <section className='menu-list'>
                 {
-                    fetch(process.env.API_URL + '/api/menu/categories', {
+                    await fetch(process.env.API_URL + '/api/menu/categories', {
                         cache: "no-store",
                       })
                     .then(response => response.json())
@@ -27,7 +27,7 @@ export default function Menu () {
             </section>
             <section className='menu-items'>
                 {
-                    fetch(process.env.API_URL + '/api/menu/categories', {
+                    await fetch(process.env.API_URL + '/api/menu/categories', {
                         cache: "no-store",
                       })
                     .then(response => response.json())

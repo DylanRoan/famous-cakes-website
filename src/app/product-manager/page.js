@@ -13,9 +13,9 @@ export default function Menu () {
     const [removeState, setRemoveState] = useState(false);
 
     function fetchItems() {
-        useEffect(() => {
+        useEffect(async () => {
             
-            fetch(process.env.API_URL + '/api/menu/get')
+            await fetch(process.env.API_URL + '/api/menu/get')
              .then(response => response.json())
              .then(data => setItems(data))
              .catch(error => console.error('Error:', error));
@@ -60,7 +60,7 @@ export default function Menu () {
             body: `${JSON.stringify(data)}`
         })
 
-        fetch(process.env.API_URL + '/api/menu/get')
+        await fetch(process.env.API_URL + '/api/menu/get')
         .then(response => response.json())
         .then(data => setItems(data))
         .catch(error => console.error('Error:', error))
@@ -80,7 +80,7 @@ export default function Menu () {
             body: `${JSON.stringify(data)}`
         })
 
-        fetch(process.env.API_URL + '/api/menu/get')
+        await fetch(process.env.API_URL + '/api/menu/get')
         .then(response => response.json())
         .then(data => setItems(data))
         .catch(error => console.error('Error:', error))
