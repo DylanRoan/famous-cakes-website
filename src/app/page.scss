@@ -1,11 +1,15 @@
 main#homepage {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+
   h1 {
       text-align: center;
   }
 
   > .banner {
       width: 100%;
-      height: 200px;
+      height: 300px;
 
       @media screen and (max-width: 480px) {
         height: 100px;
@@ -18,12 +22,101 @@ main#homepage {
       }
   }
 
-  > article {
-      padding: 25px;
-
+  > .featured {
       display: flex;
       flex-direction: column;
 
       align-items: center;
+  }
+
+  /* Other Content */
+  > article {
+    display: flex;
+    height: 500px;
+
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.3), /* Top shadow */
+                0px 0px 10px rgba(0,0,0,0.3), /* Right shadow */
+                -0px 0px 10px rgba(0,0,0,0.3), /* Bottom shadow */
+                0px 0px 10px rgba(0,0,0,0.3); /* Left shadow */
+
+    @media screen and (max-width: 480px) {
+      flex-direction: column;
+    }
+
+    > aside.article_background {
+      overflow: hidden;
+      width: 50%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      @media screen and (max-width: 480px) {
+        width: 100%;
+        height: 50%;
+      }
+
+      @media screen and (min-width: 481px) {
+        &:nth-child(2n - 1) { border-radius: 0 100% 100% 0;}
+        &:nth-child(2n) { border-radius: 100% 0 0 100%; }
+      }
+      
+
+      > video {
+        width: 100%;
+      }
+    }
+
+    > aside.article_content {
+      flex: 1;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 25px;
+      margin: 25px;
+      
+      overflow: hidden;
+
+      > div {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        gap: 50px;
+        overflow-y: visible;
+        overflow-x: scroll;
+
+        > a {
+          display: flex;
+          justify-content: center;
+
+          &:hover > img {
+            box-shadow: 0 0 10px black;
+            transform: scale(110%);
+          }
+        }
+
+        > svg {
+          height: 35px;
+        }
+
+        > h3 {
+          width: 200px;
+        }
+
+        img {
+          transition: 0.2s all ease-in-out;
+
+          width: 150px;
+          aspect-ratio: 1 / 1;
+          object-fit: cover;
+          object-position: center;
+          border-radius: 100%;
+
+          @media screen and (max-width: 480px) { width: 100px;}
+        }
+      }
+    }
   }
 }

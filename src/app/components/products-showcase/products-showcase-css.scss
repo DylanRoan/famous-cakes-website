@@ -1,8 +1,6 @@
 section.products-showcase {
-    max-width: 60vw;
-
     display: flex;
-    gap: 50px;
+    gap: 25px;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
@@ -30,11 +28,14 @@ section.products-showcase {
             width: 100%;
             height: 50%;
             object-fit: cover;
+            object-position: center;
         }
 
         > div {
+            flex: 1;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
             gap: 15px;
             padding: 15px;
             text-align: center;

@@ -31,10 +31,18 @@ main#menu {
                         width: 100px;
                     }
 
+                    &:hover > img {
+                        box-shadow: 0 0 10px black;
+                        transform: scale(110%);
+                    }
+
                     > img {
+                        transition: 0.2s transform ease-in-out, 0.2s box-shadow ease-in-out;
+
                         width: inherit;
                         aspect-ratio: 1 / 1;
                         object-fit: cover;
+                        object-position: center;
                         border-radius: 100%;
                     } 
                 }
@@ -58,10 +66,24 @@ main#menu {
             flex-direction: column;
             gap: 5px;
 
+            h4 {
+                transition: 0.2s transform ease-in-out;
+                &:hover {
+                    transform: scale(110%);
+                }
+            }
+
             > div {
                 display: flex;
                 flex-direction: column;
                 gap: 5px;
+
+                a {
+                    transition: 0.2s transform ease-in-out;
+                    &:hover {
+                        transform: scale(110%);
+                    }
+                }
             }
         }
     }

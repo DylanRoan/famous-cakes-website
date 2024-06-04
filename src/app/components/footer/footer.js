@@ -16,6 +16,12 @@ const Footer = () => {
                 <a target='_blank' href={`https://deliveroo.ae/menu/Abu%20Dhabi/al-wahdah/famous-cakes/`}><p>Deliveroo</p></a>
                 <a target='_blank' href={`https://www.talabat.com/uae/famous-cakes`}><p>Talabat</p></a>
             </section>
+
+            <section>
+                <h3>Follow Us</h3>
+                <a target='_blank' href={`https://www.instagram.com/famouscakes.ae`}><p>Instagram</p></a>
+                <a target='_blank' href={`https://www.facebook.com/famouscakes.ae/`}><p>Facebook</p></a>
+            </section>
         </footer>
     );
 }
