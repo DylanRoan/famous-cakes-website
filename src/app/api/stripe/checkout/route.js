@@ -1,10 +1,14 @@
+import { redirect } from 'next/navigation'
 import { NextRequest, NextResponse } from 'next/server'
 const stripe = require('stripe')(process.env.STRIPE_SECRET) 
 
 let res = NextResponse
 export async function POST(req) {
-    /* 
-    {
+
+    try {
+        const checkoutSession = await stripe.checkout.sessions.create({
+            line_items: [
+                {
                     price_data: {
                         currency: 'aed',
                         unit_amount_decimal: '120.00',
@@ -15,22 +19,23 @@ export async function POST(req) {
                     },
                     quantity: 3
                 },
-    */
-
-    try {
-        const checkoutSession = await stripe.checkout.sessions.create({
-            line_items: [
                 {
-                  // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-                  price: 'price_1Phn3YRxkU27dPbzHCyP8m1P',
-                  quantity: 1,
+                    price_data: {
+                        currency: 'aed',
+                        unit_amount_decimal: '89.00',
+                        product_data: {
+                            name: "The famous cake 1/2 kilo",
+                            description: 'This is an item to purchase 2'
+                        }
+                    },
+                    quantity: 5
                 },
               ],
             mode: 'payment',
             success_url: `${process.env.API_URL}`
         })
 
-        res.redirect(checkoutSession.url)
+        redirect(checkoutSession.url)
     }
     catch (error) {
         return res.json({status: 400, message: "There was an error.", error: error.toString()})
