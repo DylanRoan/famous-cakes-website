@@ -1,4 +1,3 @@
-import { redirect } from 'next/navigation'
 import { NextRequest, NextResponse } from 'next/server'
 const stripe = require('stripe')(process.env.STRIPE_SECRET) 
 
@@ -35,7 +34,7 @@ export async function POST(req) {
             success_url: `${process.env.API_URL}`
         })
 
-        redirect(checkoutSession.url)
+        return NextResponse.redirect(checkoutSession.url)
     }
     catch (error) {
         return res.json({status: 400, message: "There was an error.", error: error.toString()})
