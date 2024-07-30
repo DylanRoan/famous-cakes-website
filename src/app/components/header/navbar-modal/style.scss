@@ -1,0 +1,93 @@
+@keyframes slide {
+    from {
+        transform: translate(-100vw, -15px);
+    }
+    to {
+        transform: translate(-15px, -15px);
+    }
+}
+
+
+div.nav-modal-container {
+    display: flex;
+    flex-direction: column;
+    transform: translate(-15px, -15px);
+    z-index: 1;
+
+    @media screen and (min-width: 781px) {
+        display: none;
+    }
+
+    position: fixed;
+
+    min-height: 100vh;
+    max-width: 65vw;
+    padding: 25px;
+    
+    animation-name: slide;
+    animation-duration: 0.5s;
+}
+
+nav.nav-modal {
+    display: flex;
+    flex-direction: column;
+
+    @media screen and (min-width: 781px) {
+        display: none;
+    }
+
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+
+    > a {
+        width: 150px;
+    }
+
+    a {
+        transition: 0.2s ease-in-out transform;
+        font-size: 16px;
+        padding: 15px;
+
+        &:hover {
+            transform: scale(110%);
+        }
+    }
+
+    .nav-dropdown {
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        width: 150px;
+
+        svg {
+            width: 20px;
+            height: 20px;
+            transition: 0.2s ease-in-out transform;
+        }
+
+        .nav-dropdown-title {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .nav-dropdown-content {
+            display: none;
+            flex-direction: column;
+            width: inherit;
+        }
+    }
+
+    .nav-dropdown:hover {
+
+        .nav-dropdown-content {
+            display: flex;
+        }
+        
+        svg {
+            transform: rotate(180deg);
+        }
+
+    }
+}

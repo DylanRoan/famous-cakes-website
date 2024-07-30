@@ -1,18 +1,44 @@
 footer {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    gap: 25px;
+    @media screen and (max-width: 780px) {
+        gap: 15px;
+    }
+
     box-shadow: 0px 5px 10px black;
     padding: 50px;
-    gap: 50px;
+    @media screen and (max-width: 780px) {
+        padding: 25px;
+    }
 
-    display: flex;
-    flex-wrap: wrap;
-
-    > section {
+    > .footer-content-container {
         display: flex;
-        flex-direction: column;
-        gap: 25px;
-
-        a > p {
-            text-decoration: underline;
+        gap: 50px;
+        @media screen and (max-width: 780px) {
+            gap: 25px;
         }
+        flex-wrap: wrap;
+
+        > section {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+
+            a {
+                font-size: calc(1rem + 0.1vw)
+            }
+        }
+    }
+
+    > .footer-line {
+        border-top: 1px solid black;
+        border-radius: 100%;
+    }
+
+    > .footer-mini {
+        display: flex;
+        justify-content: space-between;
     }
 }
