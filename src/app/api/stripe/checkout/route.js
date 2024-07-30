@@ -34,7 +34,7 @@ export async function POST(req) {
             success_url: `${process.env.API_URL}`
         })
         
-        return NextResponse.redirect(new URL(checkoutSession.url))
+        return res.redirect(checkoutSession.url, 303)
     }
     catch (error) {
         return res.json({status: 400, message: "There was an error.", error: error.toString()})
