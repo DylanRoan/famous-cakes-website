@@ -10,7 +10,7 @@ export async function POST(req) {
                 {
                     price_data: {
                         currency: 'aed',
-                        unit_amount_decimal: '120.00',
+                        unit_amount_decimal: '12000',
                         product_data: {
                             name: "The famous cake",
                             description: 'This is an item to purchase'
@@ -21,7 +21,7 @@ export async function POST(req) {
                 {
                     price_data: {
                         currency: 'aed',
-                        unit_amount_decimal: '89.00',
+                        unit_amount_decimal: '8900',
                         product_data: {
                             name: "The famous cake 1/2 kilo",
                             description: 'This is an item to purchase 2'
@@ -33,8 +33,8 @@ export async function POST(req) {
             mode: 'payment',
             success_url: `${process.env.API_URL}`
         })
-
-        return NextResponse.redirect(checkoutSession.url)
+        
+        return NextResponse.redirect(new URL(checkoutSession.url))
     }
     catch (error) {
         return res.json({status: 400, message: "There was an error.", error: error.toString()})
