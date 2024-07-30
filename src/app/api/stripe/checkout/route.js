@@ -27,7 +27,7 @@ export async function POST(req) {
                 },
               ],
             mode: 'payment',
-            success_url: `${process.env.API_URL}/cart?success=true`
+            success_url: `${process.env.API_URL}`
         })
 
         return res.redirect(checkoutSession.url)
