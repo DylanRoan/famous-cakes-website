@@ -1,6 +1,9 @@
 # Famous Cakes Website
 This website is the Famous Cakes website that displays their items. 
 
+### This Project is being overhauled
+A new website is under development in a private repository with better solutions and implementation.
+
 ## Requirements to run
 A `.env` file that contains the PostgreSQL connection URL, as well as the API url for development / production purposes.
 
