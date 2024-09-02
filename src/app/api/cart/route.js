@@ -30,15 +30,13 @@ export async function POST(req) { //add to user cart
 
     if (body.product_id == undefined || body.product_id == "") 
         return res.json({status: 400, message: "Missing product id."})
-    if (body.option_index === undefined || body.option_index === "") 
-        return res.json({status: 400, message: "Missing option index."})
     if (body.amount == undefined || body.amount == "") 
         return res.json({status: 400, message: "Missing product amount."})
 
     if (body.amount < 1) body.amount = 1
     if (body.amount > 99) body.amount = 99
 
-    let result = await addToCart(user_id, body.product_id, body.option_index, body.amount)    
+    let result = await addToCart(user_id, body.product_id, body.amount)    
     return res.json(result)
 }
 
@@ -57,9 +55,7 @@ export async function DELETE(req) { //remove from user cart
 
     if (body.product_id == undefined || body.product_id == "") 
         return res.json({status: 400, message: "Missing product id."})
-    if (body.option_index === undefined || body.option_index === "") 
-        return res.json({status: 400, message: "Missing option index."})
 
-    let result = await removeFromCart(user_id, body.product_id, body.option_index)    
+    let result = await removeFromCart(user_id, body.product_id)    
     return res.json(result)
 }

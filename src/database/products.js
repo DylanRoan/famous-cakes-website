@@ -27,8 +27,8 @@ module.exports.product = async (product) => {
     return result
 }
 
-module.exports.products = async (category = false, subcategory = false, extra = false) => {
-    let params = {'category': category, 'subcategory': subcategory, 'extra': extra}
+module.exports.products = async (category = false, subcategory = false, sort = false, price_name_sort = [], user_id = false) => {
+    let params = {'category': category, 'subcategory': subcategory, 'sort': sort}
     let placeholder = []
     let parameters = []
     let index = 1
@@ -41,12 +41,64 @@ module.exports.products = async (category = false, subcategory = false, extra = 
         }
     }
 
-    let query = `SELECT * FROM products`
+    let query = `SELECT products.*, (
+            SELECT COALESCE(ROUND(AVG(r.rating), 1), 0)
+            FROM reviews r
+            WHERE r.product_id = products.product_id
+        ) AS average_rating,
+        (
+            SELECT COUNT(*)
+            FROM reviews r
+            WHERE r.product_id = products.product_id
+        ) AS num_reviews`
+
+    if (user_id) {
+        query += `, (SELECT amount FROM cart WHERE user_id = '${user_id}' AND product_id = products.product_id) AS cart_count`
+    }
+
+    query += ` FROM products `
+
     if (placeholder.length > 0) query += " WHERE " + placeholder.join(" AND ")
+
+
+    let order_by = [`CASE WHEN category = 'cake' THEN 0 ELSE 1 END`, 'custom DESC', 'category', 'subcategory']
+    order_by.concat(price_name_sort)
+    
+    query += " ORDER BY " + order_by.join(", ")
     query += ';'
 
     let result = await db.query(query, parameters)
-    return result
+    if (!result) 
+        return {status: 400, message: "Database error."}
+    else
+        return {status: 200, message: result.rows}
+}
+
+module.exports.categories = async () => {
+    let result = await db.query(`
+        WITH filtered_subcategories AS (
+            SELECT
+                category,
+                subcategory
+            FROM products
+            WHERE subcategory <> ''
+            ORDER BY CASE WHEN category = 'cake' THEN 0 ELSE 1 END
+        ),
+        subcategories_aggregated AS (
+            SELECT
+                category,
+                array_agg(DISTINCT subcategory ORDER BY subcategory) AS subcategories
+            FROM filtered_subcategories
+            GROUP BY category
+            ORDER BY CASE WHEN category = 'cake' THEN 0 ELSE 1 END
+        )
+        SELECT json_object_agg(category, subcategories) AS categories
+        FROM subcategories_aggregated;`)
+
+    if (!result)
+        return {status: 400, message: "Database error."}
+    else
+        return {status: 200, message: result.rows}
 }
 
 

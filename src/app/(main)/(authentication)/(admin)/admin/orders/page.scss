@@ -1,0 +1,110 @@
+main#admin-orders {
+    display: flex;
+    flex-direction: column;
+
+    > section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+
+        h1 {
+            text-align: center;
+        }
+
+        > div {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 500px;
+
+            border: 2px solid;
+            border-color: rgb(236,232,26);
+            &.ORDERED { border-color: black;}
+            &.DELAYED { border-color: orange;}
+            &.COMPLETED { border-color: green;}
+            &.CANCELLED { border-color: red;}
+            padding: 5px 15px;
+            border-radius: 15px;
+
+            > div {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+        }
+
+        .orders-item {
+            cursor: pointer;
+            transition: scale 0.2s ease-in-out;
+            &:hover {
+                scale: 105%;
+            }
+        }
+    }
+}
+
+main#admin-order {
+    display: flex;
+    @media screen and (max-width: 780px) {
+        flex-direction: column;
+    }
+    gap: 25px;
+
+    section, form {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        > div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+
+            > div {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+
+        
+        .order-product-name {
+            width: 50%;
+        }
+
+        .order-product-content {
+            width: 50%;
+        }
+
+        select, button {
+            width: 125px;
+            border: 1px solid black;
+            cursor: pointer;
+            background-color: white;
+        }
+    }
+
+    @media screen and (min-width: 781px) {
+        .order-info {
+            flex: 1;
+        }
+
+        .order-products {
+            flex: 2;
+        }
+    }
+
+    .order-products {
+        gap: 15px;
+    }
+
+    //back button
+    svg {
+        cursor: pointer;
+        transition: scale 0.2s ease-in-out;
+        &:hover {
+            scale: 105%;
+        }
+    }
+}

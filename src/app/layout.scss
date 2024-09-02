@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
 
+#development {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 html {
     font-size: 16px;
 }
@@ -19,18 +26,19 @@ html {
   /* css for body */
 body {
     width: 100vw;
+    min-width: 320px;
     overflow-x: hidden;
 }
 
 main {
     min-height: calc(100vh);
     padding: 50px;
-    @media screen and (max-width: 480px) { padding: 25px; }
+    @media screen and (max-width: 780px) { padding: 25px; }
     overflow-x: hidden;
 }
 
 /* Fonts */
-@media (max-width: 480px) {
+@media (max-width: 780px) {
     h1 { font-size: calc(1rem + 3vw); }
     h2 { font-size: calc(1rem + 1.5vw); }
     h3 { font-size: calc(1rem + 0.75vw); }
@@ -43,7 +51,7 @@ main {
 
 }
 
-@media (min-width: 481px) {
+@media (min-width: 781px) {
     h1 { font-size: calc(1rem + 1.5vw); }
     h2 { font-size: calc(1rem + 1vw); }
     h3 { font-size: calc(1rem + 0.5vw); }
@@ -80,7 +88,20 @@ main {
 /* colors */
 .bg-lavender-blush { background-color: #F5E6E8ff; }
 .bg-blush { background-color: #f7eacc; }
+.bg-white { background-color: white; }
 
+.boxshadow {
+    -webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+}
+
+.font-color {
+    color: white;
+}
+
+//DARK MODE ENFORCEMENT
+//TODO
 
 //Errors
 #not-found {

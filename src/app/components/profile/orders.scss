@@ -1,0 +1,20 @@
+.profile-orders {
+    display: flex;
+    flex-direction: column;
+
+    section {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        > div {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            > p {
+                flex: 1;
+            }
+        }
+    }
+}

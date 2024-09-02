@@ -2,12 +2,9 @@
 
 import { faPlay, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { loadStripe } from "@stripe/stripe-js";
 import { useEffect, useState } from "react"
 
-const stripePromise = loadStripe(
-    process.env.STRIPE_PUBLISHABLE
-)
+import './cart.scss'
 
 export default function CartPanel () {
     const [data, setData] = useState({status: false});
@@ -97,33 +94,34 @@ export default function CartPanel () {
             <h3>Item(s) Price: {data['message'].reduce((prev, current) => prev + parseFloat(current['total_price']), 0).toLocaleString()} AED
             </h3>
             <form action="/api/stripe/checkout" method="POST">
-                <button>Purchase ({"X"} Items)</button>
+                <button>Purchase ({data.message.length} Items)</button>
+                <input type="text" name="cake_writing" id="cake_writing" placeholder="If you have any special requests, please let us know!"></input>
             </form>
         </section>
         <section className="cart-content">
             {
                 data['message'].map((o, i) => 
-                <div key={i}>
-                    <div dangerouslySetInnerHTML={{ __html: ` 
+                <div key={i} className={`cart-product `}>
+                    <div className="cart-product-image-container" dangerouslySetInnerHTML={{ __html: ` 
                         <img src='/assets/product/${o.category}/${o.product_id}.jpg' class='product-image'  onerror="this.src = '/assets/logo.jpg'" ></img>`}}>
                     </div>
-                    <div className="product-main">
+                    <div className="cart-product-main-container">
                         <div>
-                            <p className="product-cart-name tiny">{o.option != "" ? (`${o.option} || `) : ``}{o.name}</p>
+                            <p className="cart-product-name tiny">{o.option != "" ? (`${o.option} || `) : ``}{o.name}</p>
                         </div>
                         <div>
                             <p className="tiny">{o.total_price} AED</p>
                         </div>
                     </div>
-                    <div>
+                    <div className="cart-product-amount-container">
                         <span>
                             <button className="increment_button" onClick={(e) => changeValue(o.product_id, o.option_index, -1)}><FontAwesomeIcon icon={faPlay} className="rotate-180"></FontAwesomeIcon></button>
                             <input className="tiny" id={`product-${o.product_id}-${o.option_index}`} type="number" value={o.amount} min={1} max={99}></input>
                             <button className="increment_button" onClick={(e) => changeValue(o.product_id, o.option_index, 1)}><FontAwesomeIcon icon={faPlay}></FontAwesomeIcon></button>
                         </span>
                     </div>
-                    <div>
-                        <FontAwesomeIcon icon={faX} onClick={(e) => removeItem(o.product_id, o.option_index)}></FontAwesomeIcon>
+                    <div className="cart-product-remove-container">
+                        <FontAwesomeIcon className="button-remove" icon={faX} onClick={(e) => removeItem(o.product_id, o.option_index)}></FontAwesomeIcon>
                     </div>
                 </div>)
             }

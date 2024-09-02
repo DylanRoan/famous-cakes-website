@@ -1,8 +1,14 @@
 header {
     overflow: hidden;
     width: 100vw;
+    min-width: 320px;
     padding: 20px;
-    @media screen and (max-width: 780px) { padding: 15px; }
+    z-index: 1;
+    @media screen and (max-width: 780px) { 
+        position: sticky;
+        top: 0;
+        padding: 15px; 
+    }
 
     display: flex;
     flex-direction: column;
@@ -39,25 +45,24 @@ header {
 
         //Mobile layout for main content
         @media screen and (max-width: 780px) {
-            flex-direction: column;
             gap: 10px;
+            justify-content: center;
 
             div#header-logo-container {
                 display: none;
             }
 
             div#header-buttons-container {
-                -ms-flex-order: 2;
-                order: 2;
-            }
-            
-            div#header-search-container {
-                -ms-flex-order: 3;
-                order: 3;
+                justify-content: space-between;
+                flex: none;
             }
 
             .header-menu-button-breakpoint {
                 display: flex;
+            }
+
+            .mobile-hide {
+                display: none;
             }
         }
 
@@ -91,6 +96,11 @@ header {
         /* Search setup */
         input {
             width: 265px;
+            
+            @media screen and (max-width: 780px) {
+                width: 100%;
+            }
+
             height: 35px;
             padding: 5px;
             border: 1px solid lightgrey;
@@ -114,16 +124,19 @@ header {
         }
 
         .header-search-suggestion {
-            position: absolute;
             display: flex;
+            @media screen and (max-width: 780px) {
+                display: none;
+            }
+            position: absolute;
+            z-index: 2;
+            border-radius: 15px;
             flex-direction: column;
             transform: translateY(calc(50% + 18px));
 
             width: 300px;
             padding: 15px;
             gap: 25px;
-
-            background-color: white;
 
             a {
                 display: flex;

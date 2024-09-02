@@ -60,7 +60,9 @@ export default function ProductManager () {
             category: formData.get("category"),
             subcategory: formData.get("subcategory"),
             description: formData.get("description"),
-            price: formData.get("price")
+            price: formData.get("price"),
+            availability: formData.get("availability") !== null,
+            custom: formData.get("custom") !== null
         }
 
         if (selectedItem)
@@ -107,22 +109,27 @@ export default function ProductManager () {
     }
     
     return (
-        <main id='admin-product-manager'>
+        <main id='admin-products'>
             <h1>Product Manager</h1>
             <section>
                 <aside>
                     <form onSubmit={onSubmit} id='product-form'>
                         <div className='identifier_container'>
                             <label htmlFor='product_id'>ID:</label>
-                            <input placeholder={selectedItem ? selectedItem.product_id : ""} type='text' id='product_id' name='product_id'></input>
+                            <input placeholder={selectedItem ? selectedItem.product_id : ""} type='text' id='product_id' name='product_id'></input>                           
+                        </div>
 
+                        <div>
                             <label htmlFor='name'>Name:</label>
                             <input placeholder={selectedItem ? selectedItem.name : ""} type='text' id='name' name='name'></input>
                         </div>
+
                         <div className='category_container'>
                             <label htmlFor='category'>Category:</label>
                             <input placeholder={selectedItem ? selectedItem.category : ""} type='text' id='category' name='category'></input>
+                        </div>
 
+                        <div>
                             <label htmlFor='subcategory'>Subcategory:</label>
                             <input placeholder={selectedItem ? selectedItem.subcategory : ""} type='text' id='subcategory' name='subcategory'></input>
                         </div>
@@ -132,9 +139,20 @@ export default function ProductManager () {
                             <input placeholder={selectedItem ? selectedItem.price : ""} type='number' id='price' name='price'></input>
                         </div>
 
-                        <label htmlFor='description'>Description:</label>
-                        <input placeholder={selectedItem ? selectedItem.description : ""} type='text' id='description' name='description'></input>
+                        <div>
+                            <label htmlFor='description'>Description:</label>
+                            <input placeholder={selectedItem ? selectedItem.description : ""} type='text' id='description' name='description'></input>
+                        </div>
 
+                        <div>
+                            <label htmlFor='availability'>Availability</label>
+                            <input type='checkbox' defaultChecked={selectedItem.availability} name='availability' id='availability'></input>
+                        </div>
+
+                        <div>
+                            <label htmlFor='custom'>Custom Cake</label>
+                            <input type='checkbox' defaultChecked={selectedItem.custom} name='custom' id='custom'></input>
+                        </div>
 
                         {
                             selectedItem && (

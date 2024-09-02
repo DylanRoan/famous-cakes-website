@@ -6,7 +6,7 @@ main#products-page {
 
 section.banner {
     padding: 50px;
-    @media screen and (max-width: 480px) { padding: 25px; }
+    @media screen and (max-width: 480px) { display: none; }
 }
 section.content {
     display: flex;
@@ -18,34 +18,145 @@ section.content {
 
     gap: 25px;
 
-    a {
+    .product {
         display: flex;
         flex-direction: column;
         text-align: center;
 
         width: 200px;
         height: 300px;
+        @media screen and (max-width: 540px) {
+            width: 45%;
+            height: auto;
+        }
+        aspect-ratio: 1 / 1;
         padding: 15px;
 
-        border: 1px solid black;
+        border: none;
+        border-radius: 15px;
+        background-color: white;
 
         .product-image {
             aspect-ratio: 1 / 1;
             object-fit: cover;
             width: 100%;
-            border-radius: 100%;
         }
 
         .product-name {
-            height: 100%;
+            flex: 1;
         }
 
+        .product-price {
+            text-align: right;
+        }
+
+        cursor: pointer;
         transition: 0.2s ease-in-out transform;
         &:hover {
             transform: scale(105%);
+        }
+
+        position: relative;
+
+        .bubble {
+            position: absolute;
+            display: none;
+
+            width: 20px;
+            border-radius: 100%;
+            aspect-ratio: 1 / 1;
+
+            transition: 0.2s ease-in-out transform;
+            &:hover {
+                transform: scale(150%);
+            }
+
+            svg {
+                width: 60%;
+            }
+        }
+
+        .show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .count {
+            background-color: pink;
+            
+            right: 10px;
+            top: 10px;
+        }
+
+        .remove {    
+            background-color: lightcoral;
+            
+            left: 10px;
+            top: 10px;
+        }
+
+        .sold-out {
+            position: absolute;
+
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            background-color: lightcoral;
+            width: 80%;
+            height: 20px;
+            border-radius: 5px;
         }
     }
 }
 
 
+}
+
+
+
+
+
+
+
+main#products-category-page {
+    display: flex;
+    flex-direction: column;
+
+    section {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        a {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+
+            width: 200px;
+            @media screen and (max-width: 540px) {
+                width: 45%;
+                height: auto;
+            }
+            aspect-ratio: 1 / 1;
+            padding: 15px;
+
+            border: none;
+            border-radius: 15px;
+            background-color: white;
+
+            cursor: pointer;
+            transition: 0.2s ease-in-out transform;
+            &:hover {
+                transform: scale(105%);
+            }
+
+            img {
+                aspect-ratio: 1 / 1;
+                object-fit: cover;
+                width: 100%;
+            }
+        }
+    }
 }

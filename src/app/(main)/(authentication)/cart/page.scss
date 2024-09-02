@@ -1,0 +1,212 @@
+main#cart {
+    display: flex;
+    gap: 25px;
+    @media screen and (max-width: 780px) {
+        flex-direction: column;
+    }
+
+    section {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+    }
+
+    /* ---------- Cart Form Component ---------- */
+    form.cart-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+
+        /* pages */
+        > div {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        fieldset {
+            width: 45%;
+            min-height: 150px;
+            @media screen and (max-width: 780px) {
+                width: 100%;
+                flex-wrap: wrap;
+            }
+            padding: 15px;
+            
+            border: none;
+            border-top: 2px solid black;
+
+            display: flex;
+            gap: 25px;
+            /* Full width fieldset input changes */
+            &.field-full {
+                width: 100%;
+
+                /* Items go vertical*/
+                flex-direction: column;
+                align-items: stretch;
+                > div {
+                    /* Items go horizontal */
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 15px;
+                    > div {
+                        display: flex;
+                        flex: 1;
+                    }
+
+                    label {
+                        flex: 1;
+                    }
+
+                    input {
+                        flex: 2;
+                        border: 1px solid black;
+                    }
+                }
+            }
+
+            legend {
+                padding: 0 5px;
+            }
+        }
+
+        .cart-form-price {
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        #cart-special_request {
+            width: 100%;
+            height: 100px;
+            border-radius: 15px;
+            border: solid black 2px;
+            padding: 15px;
+        }
+
+        button {
+            padding: 5px;
+            min-width: 100px;
+            min-height: 35px;
+            border: 2px solid black;
+            border-radius: 15px;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        /* Radio Button CSS */
+        input[type="radio"] {
+            position: fixed;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        input[type="radio"] + label {
+            cursor: pointer;
+            min-width: 75px;
+            width: 20%;
+            aspect-ratio: 1 / 1;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            padding: 5px;
+            gap: 15px;
+            text-align: center;
+
+            transition: 0.2s border ease-in;
+            border: solid black 2px;
+            border-radius: 15px;
+
+            svg {
+                transition: 0.2s all ease-in;
+                height: 15px;
+            }
+        }
+        
+        input[type="radio"]:checked + label {
+            border: solid pink 2px;
+
+            svg {
+                height: 25px;
+            }
+        }
+    }
+
+    /* ---------- Cart Item Component ---------- */
+    article.cart-product {
+        display: flex;
+        justify-content: space-between;
+
+        height: 150px;
+        width: 100%;
+        gap: 20px;
+
+        @media screen and (max-width: 780px) {
+            width: 100%;
+        }
+
+        aside {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Image and Amount Selector CSS */
+        .cart-product-image {
+            div {
+                display: flex;
+                align-items: center;
+                height: 100%;
+            }
+            
+            img {
+                aspect-ratio: 1/1;
+                height: 75%;
+                object-fit: cover;
+            }
+
+            span {
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100%;
+                transform: translateY(-20px);
+
+                display: flex;
+                justify-content: center;
+
+                button, input {
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 25px;
+                    aspect-ratio: 1 / 1;
+                    text-align: center;
+
+                    background-color: white;
+                    border: 1px solid black;
+
+                    .rotate-180 {
+                        transform: rotateY(180deg);
+                    }
+                }
+            }
+        }
+
+        /* Cart Main Content */
+        .cart-product-name {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        } 
+    }
+}

@@ -1,13 +1,15 @@
-main#admin-product-manager {
+main#admin-products {
     
     display: flex;
     flex-direction: column;
+    
 
     section {
         display: flex;
         @media screen and (max-width: 780px) {
             flex-direction: column;
         }
+        gap: 25px;
 
         aside {
             flex: 1;
@@ -25,37 +27,23 @@ main#admin-product-manager {
     form {
         display: flex;
         flex-direction: column;
-        gap: 25px;
+        gap: 5px;
 
+        > div {
+            display: flex;
+            gap: 5px;
+            justify-content: space-between;
 
-        padding: 25px;
-
+            > div {
+                display: flex;
+                flex: 1;
+                gap: 5px;
+            }
+        }
 
         input {
             border: none;
             border-bottom: 1px solid black;
-            width: 100%;
-        }
-
-        label {
-            width: 75px;
-        }
-
-
-        div {
-            display: flex;
-            @media screen and (max-width: 780px) {
-                flex-direction: column;
-            }
-            gap: 25px;
-
-            input {
-                flex: 2;
-            }
-
-            label {
-                flex: 1;
-            }
         }
     }
 

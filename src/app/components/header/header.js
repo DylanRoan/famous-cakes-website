@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPhone, faMagnifyingGlass, faCartShopping, faBagShopping, faUser, faLocationDot, faBars } from '@fortawesome/free-solid-svg-icons';
+import { faPhone, faMagnifyingGlass, faCartShopping, faBagShopping, faUser, faLocationDot, faBars, faCakeCandles } from '@fortawesome/free-solid-svg-icons';
 
 import './style.scss'
 import NavBar from './navbar/navbar';
@@ -26,9 +26,8 @@ const Header = () => {
         }
     }, [nav_modal])
 
-    function toggleMenuModal() {
-        if (modalState) setModalState(false)
-        else setModalState(true)
+    const toggleMenuModal = (e) => {
+        if (!modalState) setModalState(true)
     }
     
     const [search, setSearch] = useState(false);
@@ -56,17 +55,17 @@ const Header = () => {
     }
     
     return (
-        <header>
+        <header className='bg-white'>
             <section>
                 <div className='header-spacing' id='header-logo-container'>
-                <Link href='/'><img alt='' src='/assets/logo.png' className='header-logo'></img></Link>
+                <a href='/'><img alt='' src='/assets/logo.png' className='header-logo'></img></a>
                     <h1 id='header-title' className='hide-breakpoint'>Famous Cakes</h1>
                 </div>
                 <div id='header-search-container'>
                     <input placeholder='Search amongst our products...' onChange={onSearchChange}></input>
                     <button><FontAwesomeIcon icon={faMagnifyingGlass}/></button>
                     {  search && (
-                        <div className='header-search-suggestion'>
+                        <div className='header-search-suggestion bg-white'>
                             {
                                 search.map((o, i) => 
                                     <Link href={`/product/${o.product_id}`} onClick={() => setSearch(false)}><p>{o.name}</p><p>{o.price} AED</p></Link>
@@ -76,23 +75,22 @@ const Header = () => {
                     )}
                 </div>
                 <div className='header-spacing' id='header-buttons-container'>
-                    <Link href='/' className='header-menu-button-breakpoint'><img alt='' src='/assets/logo.png' className='header-logo'/></Link>
+                    <a href='/profile' className='mobile-hide'><FontAwesomeIcon icon={faUser}/><span>Profile</span></a>
+                    <a href='/orders' className='mobile-hide'><FontAwesomeIcon icon={faBagShopping}/><span>Orders</span></a>
+                    <a href='/cart' className='mobile-hide'><FontAwesomeIcon icon={faCartShopping}/><span>Cart</span></a>
 
-                    <Link href='/profile'><FontAwesomeIcon icon={faUser}/><span>Profile</span></Link>
-                    <Link href='/profile/orders'><FontAwesomeIcon icon={faBagShopping}/><span>Orders</span></Link>
-                    <Link href='/profile/cart'><FontAwesomeIcon icon={faCartShopping}/><span>Cart</span></Link>
-
-                    <a className='header-menu-button-breakpoint' onClick={() => toggleMenuModal()}><FontAwesomeIcon icon={faBars}/><span>Menu</span></a>
+                    <a className='header-menu-button-breakpoint' onClick={toggleMenuModal}><FontAwesomeIcon icon={faBars}/><span>Menu</span></a>
                 </div>
             </section>
             <NavBar></NavBar>
             {
-                modalState && (
-                    <div className='nav-modal-container bg-lavender-blush' ref={nav_modal}>
-                        <NavBarModal></NavBarModal>
-                    </div>
-                )
+                <div className={`nav-modal-container bg-lavender-blush ${modalState ? 'nav-modal-show' : 'nav-modal-hide'}`} ref={nav_modal}>
+                    <NavBarModal></NavBarModal>
+                </div>
             }
+            <div id='development' className='bg-blush'>
+                <p>Site Currently In Development</p>
+            </div>
         </header>
     )
 }

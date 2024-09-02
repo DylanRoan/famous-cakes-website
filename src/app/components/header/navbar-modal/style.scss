@@ -1,4 +1,4 @@
-@keyframes slide {
+@keyframes show {
     from {
         transform: translate(-100vw, -15px);
     }
@@ -7,11 +7,27 @@
     }
 }
 
+@keyframes hide {
+    from {
+        transform: translate(-15px, -15px);
+    }
+    to {
+        transform: translate(-100vw, -15px);
+    }
+}
+
+@keyframes hstart {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
 
 div.nav-modal-container {
     display: flex;
     flex-direction: column;
-    transform: translate(-15px, -15px);
     z-index: 1;
 
     @media screen and (min-width: 781px) {
@@ -24,8 +40,14 @@ div.nav-modal-container {
     max-width: 65vw;
     padding: 25px;
     
-    animation-name: slide;
-    animation-duration: 0.5s;
+    transition: transform 0.5s ease-in-out;
+    &.nav-modal-show {
+        transform: translate(-15px, -15px);
+    }
+
+    &.nav-modal-hide {
+        transform: translate(-100vw, -15px);
+    }
 }
 
 nav.nav-modal {
@@ -79,7 +101,7 @@ nav.nav-modal {
         }
     }
 
-    .nav-dropdown:hover {
+    .nav-dropdown.drop {
 
         .nav-dropdown-content {
             display: flex;

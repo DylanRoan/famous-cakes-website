@@ -1,0 +1,54 @@
+
+main#order-item {
+    display: flex;
+    @media screen and (max-width: 780px) {
+        flex-direction: column;
+    }
+    gap: 25px;
+
+    section {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .order-info {
+        @media screen and (min-width: 781px) {
+            flex: 1;
+        }
+
+        > div {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+
+    .order-products {
+        @media screen and (min-width: 781px) {
+            flex: 2;
+        }
+        gap: 15px;
+
+        h3 {
+            text-align: center;
+        }
+
+        > div {
+            display: flex;
+            align-items: center;
+
+            > p {
+                flex: 1;
+            }
+
+            p {
+                padding: 5px;
+                text-align: center;
+            }
+
+            > div {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+    }
+}

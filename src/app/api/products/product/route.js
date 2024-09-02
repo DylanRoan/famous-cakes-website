@@ -40,6 +40,9 @@ export async function POST(req) {
     if (body.category == undefined || body.category == "") 
         return res.json({status: 400, message: "Missing category."})
     
+    if (body.product_id === 'new')
+        return res.json({status: 400, message: "'new' is an invalid id."})
+    
     if (body.price > 99999999.99) 
         body.price = 99999999.99
     if (body.price < 0)
@@ -60,6 +63,11 @@ export async function POST(req) {
         product_data['options'] = body.options
     if (body.sort != undefined && body.sort != "") 
         product_data['sort'] = body.sort
+
+    if (body.custom != undefined && body.custom != "") 
+        product_data['custom'] = body.custom
+    if (body.availability != undefined && body.availability != "") 
+        product_data['availability'] = body.availability
 
     let result = await add(product_id, product_data)
 
@@ -110,6 +118,11 @@ export async function PUT(req) {
         product_data['options'] = body.options
     if (body.sort != undefined && body.sort != "") 
         product_data['sort'] = body.sort
+
+    if (body.custom != undefined && body.custom != "") 
+        product_data['custom'] = body.custom
+    if (body.availability != undefined && body.availability != "") 
+        product_data['availability'] = body.availability
 
     let result = await edit(product_id, product_data)
 

@@ -1,5 +1,6 @@
 nav.nav {
     display: flex;
+    z-index: 1;
 
     @media screen and (max-width: 780px) {
         display: none;
