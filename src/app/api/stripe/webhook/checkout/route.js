@@ -14,9 +14,6 @@ export async function POST(req) {
     let body = ""
     try { body = await new Response(stream).text() }
     catch { return res.json({status: 400, message: "Missing body."}) }
-
-    console.log(sig)
-    console.log(req.body)
     
     let event;
   
@@ -87,6 +84,7 @@ export async function fulfillCheckout(order_id) {
 
       const order_data = {
         payment_method: 'online',
+        payment_status: true,
         delivery_method: metadata.delivery_method,
         data: delivery_data,
         order_status: 'ORDERED',
