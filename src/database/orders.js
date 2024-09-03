@@ -17,7 +17,7 @@ module.exports.getAllActiveUserOrders = async (completed = false) => {
 }
 /* */
 module.exports.getActiveOrders = async (user_id) => {
-    let result = await db.query(`SELECT * FROM orders WHERE order_status != 'COMPLETED' AND user_id = $1;`, [user_id])
+    let result = await db.query(`SELECT * FROM orders WHERE order_status != 'COMPLETED' AND order_status != 'CANCELLED' AND user_id = $1;`, [user_id])
     if (!result)
         return {status: 400, message: "Database error."}
     else

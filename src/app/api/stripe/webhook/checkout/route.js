@@ -13,6 +13,9 @@ export async function POST(req) {
     let body = ""
     try { body = await new Response(stream).text() }
     catch { return res.json({status: 400, message: "Missing body."}) }
+
+    console.log(sig)
+    console.log(body)
     
     let event;
   
