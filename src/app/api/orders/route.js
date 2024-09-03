@@ -70,7 +70,15 @@ export async function POST(req) {
 
     if (body.comment != undefined)
         order_data["comment"] = body.comment
+
+    //allows for administrator editing of data
+    let allowEdit = false
+    if (user_id === '1')
+        allowEdit = true
         
-    let result = await setOrder(body.user_id, order_id, order_data)
+    let result = await setOrder(body.user_id, order_id, order_data, allowEdit)
     return res.json(result)
 }
+
+//PUT should check allowable edits to be made for making order (can still use setOrder)
+//DELETE should allow user to cancel order (can still use setOrder)

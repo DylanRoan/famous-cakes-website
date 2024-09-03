@@ -50,7 +50,7 @@ module.exports.getOrder = async (order_id) => {
         return {status: 200, message: result.rows}
 }
 
-module.exports.setOrder = async (user_id, order_id, order_data) => {    
+module.exports.setOrder = async (user_id, order_id, order_data, allowEdit) => {    
     if (Object.keys(order_data).length < 1)
         return {status: 403, message: "Insufficient order data."}
 
@@ -70,9 +70,10 @@ module.exports.setOrder = async (user_id, order_id, order_data) => {
 
     let query = `
     INSERT INTO orders (user_id, order_id, ${columns.join(', ')})
-    VALUES ($1, $2, ${nums.join(', ')})
-    ON CONFLICT (order_id) 
-    DO UPDATE SET ${update.join(', ')}`
+    VALUES ($1, $2, ${nums.join(', ')})`
+
+    if (allowEdit)
+        query += `\nON CONFLICT (order_id) DO UPDATE SET ${update.join(', ')}`
 
     let result = await db.query(query, values)
     if (!result)

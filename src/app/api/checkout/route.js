@@ -91,8 +91,6 @@ export async function POST(req) {
         order_status: 'ORDERED'
     }
 
-    console.log(body)
-
     if (Object.keys(body).includes('special_request')) 
         order_data['special_request'] = body.special_request
 
@@ -147,7 +145,7 @@ async function OnlinePaymentStripe(sessionStatus, cartContent, body, delivery_da
                 currency: 'aed',
                 unit_amount_decimal: o.price.replace('.', ''),
                 product_data: {
-                    name: `${o.name} ${o.option}`,
+                    name: `${o.name}`,
                     description: o.description
                 }
             },
@@ -172,7 +170,7 @@ async function OnlinePaymentStripe(sessionStatus, cartContent, body, delivery_da
                 unit_amount_decimal: '2500',
                 product_data: {
                     name: `Delivery Fee`,
-                    description: `Delivery Fee for Abu Dhabi`
+                    description: `Delivery Fee`
                 }
             },
             quantity: 1

@@ -55,32 +55,64 @@ export async function fulfillCheckout(order_id) {
     if (checkoutSession.payment_status !== 'unpaid') {
 
       //process / set it up in the orders table
-      const user_id = checkoutSession.metadata.user_id
-      const special_request = checkoutSession.metadata.special_request
+      const metadata = checkoutSession.metadata
 
-      const sampleRequestDate = new Date().toISOString()
-      console.log(sampleRequestDate)
-      let orderSet = await setOrder(user_id, order_id, 
-        {
-          request_date: sampleRequestDate, 
-          order_status: "Submitted",
-          delivery_type: "Same Day", 
-          special_request: special_request
+      const user_id = metadata.user_id
+
+      let delivery_data = {}
+      if (metadata.delivery_method === 'delivery')
+      {
+        delivery_data = {
+          delivery_phone: metadata.delivery_phone,
+          delivery_street: metadata.delivery_street,
+          delivery_building: metadata.delivery_building,
+          delivery_floor: metadata.delivery_floor,
+          delivery_apartment: metadata.delivery_apartment,
+          delivery_additional: metadata.delivery_additional
         }
-      )
+      }
+      else
+      {
+        delivery_data = {
+          pickup_name: metadata.pickup_name,
+          pickup_phone: metadata.pickup_phone,
+          pickup_time: metadata.pickup_time,
+          pickup_date: metadata.pickup_date
+        }
+      }
+
+      const order_data = {
+        payment_method: 'online',
+        delivery_method: metadata.delivery_method,
+        data: {},
+        order_status: 'ORDERED',
+        special_request: metadata.special_request
+      }
+
+      let orderSet = await setOrder(user_id, order_id, order_data)
 
       //process and set up in order data table
       const line_items = checkoutSession.line_items.data
+      let order_products = []
       line_items.map(async (o, i) => {
-        if (o.description != "Online Service Fee")
+        if (o.description !== "Online Service Fee" && o.description !== 'Delivery Fee')
         {
-          await setOrderData(order_id, {
-            product_name: o.description,
+          order_products.push({
+            product_name: o.name, 
+            amount: o.quantity, 
             product_price: (o.price.unit_amount / 100),
-            amount: o.quantity
           })
         }
       })
+
+      let settingOrderData = await setOrderData(order_id, order_products)
+      if (settingOrderData.status != 200)
+          return res.json(settingOrderData)
+
+      //clear cart
+      const deleteCart = await clearCart(user_id)
+      if (deleteCart.status != 200) 
+          return res.json(deleteCart)
 
       return {status: 200, message: "Success!"}
     }
