@@ -15,7 +15,7 @@ export async function POST(req) {
     catch { return res.json({status: 400, message: "Missing body."}) }
 
     console.log(sig)
-    console.log(body)
+    console.log(req.body)
     
     let event;
   
