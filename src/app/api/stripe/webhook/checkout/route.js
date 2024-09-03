@@ -102,7 +102,7 @@ export async function fulfillCheckout(order_id) {
         if (o.description !== "Online Service Fee" && o.description !== 'Delivery Fee')
         {
           order_products.push({
-            product_name: o.name, 
+            product_name: o.description, 
             amount: o.quantity, 
             product_price: (o.price.unit_amount / 100),
           })
