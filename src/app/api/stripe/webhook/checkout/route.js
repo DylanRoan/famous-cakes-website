@@ -8,8 +8,6 @@ let res = NextResponse
 export async function POST(req) {
     const sig = req.headers.get('stripe-signature');
 
-    console.log(req.headers)
-
     //Body check
     const stream = await req.body
     let body = ""
@@ -17,13 +15,16 @@ export async function POST(req) {
     catch { return res.json({status: 400, message: "Missing body."}) }
     
     let event;
+
+    console.log(sig)
   
     try {
-        event = stripe.webhooks.constructEvent(body, sig, endpointSecret);
+        event = await stripe.webhooks.constructEvent(body, sig, endpointSecret);
     } catch (err) {
-        console.log(`Stripe Checkout Webhook Error: ${err.message}`)
+        console.log(`Stripe Checkout Webhook Error: ${err}`)
         return res.json({status: 400, message: `Webhook Error: ${err.message}`})
     }
+    console.log('got sig / event')
 
     if (event.type === 'checkout.session.completed' || event.type === 'checkout.session.async_payment_succeeded') {
         await fulfillCheckout(event.data.object.id)
