@@ -2,7 +2,7 @@ import { getOrder, setOrder, setOrderData } from '@//database/orders';
 import { NextRequest, NextResponse } from 'next/server'
 const stripe = require('stripe')(process.env.STRIPE_SECRET) 
 
-let endpointSecret = process.env.STRIPE_CLI_WEBHOOK
+let endpointSecret = process.env.STRIPE_WH_CHECKOUT
 
 let res = NextResponse
 export async function POST(req) {
@@ -94,6 +94,7 @@ export async function fulfillCheckout(order_id) {
       //process and set up in order data table
       const line_items = checkoutSession.line_items.data
       let order_products = []
+      console.log(line_items)
       line_items.map(async (o, i) => {
         if (o.description !== "Online Service Fee" && o.description !== 'Delivery Fee')
         {
