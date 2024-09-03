@@ -8,6 +8,8 @@ let res = NextResponse
 export async function POST(req) {
     const sig = req.headers.get('stripe-signature');
 
+    console.log(req.headers)
+
     //Body check
     const stream = await req.body
     let body = ""
