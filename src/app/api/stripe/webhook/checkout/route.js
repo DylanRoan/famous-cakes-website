@@ -25,7 +25,8 @@ export async function POST(req) {
     }
 
     if (event.type === 'checkout.session.completed' || event.type === 'checkout.session.async_payment_succeeded') {
-        await fulfillCheckout(event.data.object.id)
+        let fulfillment = await fulfillCheckout(event.data.object.id)
+        return res.json(fulfillment)
     }
 
     //checkout.session.async_payment_failed
@@ -93,7 +94,7 @@ export async function fulfillCheckout(order_id) {
 
       let orderSet = await setOrder(user_id, order_id, order_data)
       if (orderSet.status != 200) 
-        console.error(user_id + " | " + order_id + " | " + orderSet.message)
+        return {status: 400, message: (user_id + " | " + order_id + " | " + orderSet.message)}
 
       //process and set up in order data table
       const line_items = checkoutSession.line_items.data
@@ -112,7 +113,7 @@ export async function fulfillCheckout(order_id) {
 
       let settingOrderData = await setOrderData(order_id, order_products)
       if (settingOrderData.status != 200)
-          return res.json(settingOrderData)
+        return {status: 400, message: (user_id + " | " + order_id + " | " + settingOrderData.message)}
 
       //clear cart
       const deleteCart = await clearCart(user_id)
