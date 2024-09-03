@@ -15,9 +15,6 @@ export async function POST(req) {
     catch { return res.json({status: 400, message: "Missing body."}) }
     
     let event;
-
-    console.log(sig)
-    console.log(process.env.STRIPE_CLI_WEBHOOK)
   
     try {
         event = await stripe.webhooks.constructEvent(body, sig, endpointSecret);
@@ -25,7 +22,6 @@ export async function POST(req) {
         console.log(`Stripe Checkout Webhook Error: ${err}`)
         return res.json({status: 400, message: `Webhook Error: ${err.message}`})
     }
-    console.log('got sig / event')
 
     if (event.type === 'checkout.session.completed' || event.type === 'checkout.session.async_payment_succeeded') {
         await fulfillCheckout(event.data.object.id)
