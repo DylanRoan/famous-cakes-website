@@ -17,6 +17,7 @@ export async function POST(req) {
     let event;
 
     console.log(sig)
+    console.log(process.env.STRIPE_CLI_WEBHOOK)
   
     try {
         event = await stripe.webhooks.constructEvent(body, sig, endpointSecret);
