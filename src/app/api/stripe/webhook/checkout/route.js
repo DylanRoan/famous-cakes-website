@@ -1,3 +1,4 @@
+import { clearCart } from '@//database/cart';
 import { getOrder, setOrder, setOrderData } from '@//database/orders';
 import { NextRequest, NextResponse } from 'next/server'
 const stripe = require('stripe')(process.env.STRIPE_SECRET) 
@@ -87,17 +88,19 @@ export async function fulfillCheckout(order_id) {
       const order_data = {
         payment_method: 'online',
         delivery_method: metadata.delivery_method,
-        data: {},
+        data: delivery_data,
         order_status: 'ORDERED',
         special_request: metadata.special_request
       }
 
       let orderSet = await setOrder(user_id, order_id, order_data)
+      if (orderSet.status != 200) 
+        console.error(user_id + " | " + order_id + " | " + orderSet.message)
 
       //process and set up in order data table
       const line_items = checkoutSession.line_items.data
       let order_products = []
-      console.log(line_items)
+      
       line_items.map(async (o, i) => {
         if (o.description !== "Online Service Fee" && o.description !== 'Delivery Fee')
         {
@@ -116,7 +119,7 @@ export async function fulfillCheckout(order_id) {
       //clear cart
       const deleteCart = await clearCart(user_id)
       if (deleteCart.status != 200) 
-          return res.json(deleteCart)
+          console.error(user_id + " | " + deleteCart.message)
 
       return {status: 200, message: "Success!"}
     }
