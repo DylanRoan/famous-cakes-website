@@ -50,7 +50,7 @@ module.exports.getOrder = async (order_id) => {
         return {status: 200, message: result.rows}
 }
 
-module.exports.setOrder = async (user_id, order_id, order_data, allowEdit) => {    
+module.exports.setOrder = async (user_id, order_id, order_data, allowEdit = false) => {    
     if (Object.keys(order_data).length < 1)
         return {status: 403, message: "Insufficient order data."}
 
