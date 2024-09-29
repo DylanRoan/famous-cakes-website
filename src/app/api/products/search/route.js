@@ -1,3 +1,4 @@
+import { sessionCheck } from '@//app/session/session'
 import { search } from '@//database/products'
 import { NextRequest, NextResponse } from 'next/server'
  
@@ -21,6 +22,11 @@ export async function GET(req) {
     if (!value)
         return res.json({status: 403, message: "Missing value."})
 
-    let result = await search(value, limit)
+    let sessionStatus = await sessionCheck()
+    let user_id = false
+    if (sessionStatus.status == 200) 
+        user_id = sessionStatus.message[0].user_id
+
+    let result = await search(value, limit, user_id)
     return res.json(result)
 }

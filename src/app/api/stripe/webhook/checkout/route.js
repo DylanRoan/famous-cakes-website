@@ -118,7 +118,7 @@ export async function fulfillCheckout(order_id) {
       //clear cart
       const deleteCart = await clearCart(user_id)
       if (deleteCart.status != 200) 
-          console.error(user_id + " | " + deleteCart.message)
+        return {status: 400, message: (user_id + " | " + deleteCart.message)}
 
       return {status: 200, message: "Success!"}
     }

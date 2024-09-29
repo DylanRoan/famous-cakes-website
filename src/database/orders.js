@@ -8,7 +8,7 @@ module.exports.getAllActiveUserOrders = async (completed = false) => {
         (SELECT COUNT(*) FROM order_data WHERE order_id = orders.order_id) as product_count,
         (SELECT username FROM users WHERE orders.user_id = users.user_id) as username 
         FROM orders 
-        WHERE order_status ${completed ? '':'!'}= 'COMPLETED'
+        WHERE order_status ${completed ? '':'!'}= 'COMPLETED' OR order_status ${completed ? '':'!'}= 'CANCELLED' 
         ORDER BY order_date;`)// ORDER BY CASE WHEN order_status = 'COMPLETED' THEN 1 ELSE 0 END
     if (!result)
         return {status: 400, message: "Database error."}

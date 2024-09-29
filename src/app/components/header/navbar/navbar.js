@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCaretUp } from '@fortawesome/free-solid-svg-icons';
+import { faAngleUp, faCaretUp } from '@fortawesome/free-solid-svg-icons';
 
 import './style.scss'
 
@@ -26,7 +26,7 @@ const NavBar = () => {
             <div className='nav-dropdown'>
                 <div className='nav-dropdown-title'>
                     <a href='/products/dessert'>Desserts</a>
-                    <FontAwesomeIcon icon={faCaretUp} />
+                    <FontAwesomeIcon icon={faAngleUp} />
                 </div>
                 <div className='nav-dropdown-content'>
                     <a href='/products/dessert/cupcake'>Cupcakes</a>

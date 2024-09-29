@@ -24,5 +24,6 @@ export default function RootLayout({ children }) {
 export const viewport = {
   maximumScale: 1,
   minimumScale: 1,
-  defaultScale: 1
+  defaultScale: 1,
+  width: 'device-width'
 }

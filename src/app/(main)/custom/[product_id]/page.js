@@ -1,10 +1,8 @@
 import './page.scss'
 
-export default async function CustomCake ({searchParams}) {
+export default async function CustomCake ({ params }) {
 
-    const custom_id = searchParams.product_id
-    if (custom_id === undefined) 
-        return <main id='error'>Missing product ID.</main>
+    const custom_id = params.product_id
 
     let data = {}
     try {
@@ -42,15 +40,18 @@ export default async function CustomCake ({searchParams}) {
                         <p>Price:</p>
                         <p>{product.price} AED</p>
                     </div>
+
                     <div>
                         <p>Description:</p>
+                    </div>
+                    <div>
                         <p>{product.description}</p>
                     </div>
                 </aside>
             </section>
             <form>
                 <fieldset>
-                    <legend>Flavour</legend>
+                    <legend>Options</legend>
                     
                     <div>
                         <label for="custom-filling">Filling:</label>
@@ -61,29 +62,48 @@ export default async function CustomCake ({searchParams}) {
                             <option value="marble">Marble</option>
                         </select>
                     </div>
-                </fieldset>
 
-                <fieldset>
-                    <legend>Package Options</legend>
-                    
                     <div>
-                        <label for="cakepop-order">Cakepops Order:</label>
+                        <label for="cakepop-order">Cakepops:</label>
                         <select id="cakepop-order" name="cakepop-order">
-                            <option value="">Select Cakepops Order</option>
+                            <option value="0">Select Cakepops Order</option>
+                            <option value="0">None</option>
                             <option value="6">6 Cakepops (+25 AED)</option>
                             <option value="9">9 Cakepops (+35 AED)</option>
                             <option value="12">12 Cakepops (+50 AED)</option>
                         </select>
                     </div>
-                </fieldset>
 
-                <fieldset className='text_field'>
-                    <legend>Information</legend>
+                    <div>
+                        <label for="cupcake-order">Cupcakes:</label>
+                        <select id="cupcake-order" name="cupcake-order">
+                            <option value="0">Select Cupcakes Order</option>
+                            <option value="0">None</option>
+                            <option value="6">6 Cupcakes (+25 AED)</option>
+                            <option value="9">9 Cupcakes (+35 AED)</option>
+                            <option value="12">12 Cupcakes (+50 AED)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="weight">Weight:</label>
+                        <select id="weight" name="weight">
+                            <option value="0">Select Weight of Cake</option>
+                            <option value="1">1 Kilo</option>
+                            <option value="2">2 Kilo</option>
+                            <option value="3">3 Kilo</option>
+                        </select>
+                    </div>
+
                     <div>
                         <label htmlFor='special-request'>Special Request</label>
+                    </div>
+                    <div>
                         <input name='special_request' id='special-request' type='text'></input>
                     </div>
                 </fieldset>
+
+                <button>Order</button>
             </form>
         </main>
     )

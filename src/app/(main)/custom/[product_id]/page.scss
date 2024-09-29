@@ -24,22 +24,25 @@ main#custom-order {
 
             &.product_content_container {
                 justify-content: center;
+                width: 300px;
+
+                > div {
+                    display: flex;
+                    justify-content: space-between;
+    
+                    > p:last-of-type {
+                        text-align: right;
+                    }
+                }
             }
 
-            @media screen and (min-width: 481px) {
+            @media screen and (max-width: 480px) {
                 &.product_content_container {
                     width: 100%;
                 }
             }
 
-            > div {
-                display: flex;
-                justify-content: space-between;
-
-                > p:last-of-type {
-                    text-align: right;
-                }
-            }
+            
 
             img {
                 max-width: 200px;
@@ -74,6 +77,10 @@ main#custom-order {
         > div {
             display: flex;
             justify-content: space-between;
+
+            > input, label, select {
+                flex: 1;
+            }
         }
     }
 

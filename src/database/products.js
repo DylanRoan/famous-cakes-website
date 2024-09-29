@@ -1,8 +1,16 @@
 const db = require('./postgres')
 
-module.exports.search = async (value, limit = 5) => {
+module.exports.search = async (value, limit = 5, user_id = false) => {
     //This needs `CREATE EXTENSION pg_trgm;` on a new database.
-    let result = await db.query(`SELECT product_id, name, price FROM products ORDER BY SIMILARITY(name, $1) DESC LIMIT $2;`, [value, limit])
+    let query = `SELECT products.*`
+
+    if (user_id) {
+        query += `, (SELECT amount FROM cart WHERE user_id = '${user_id}' AND product_id = products.product_id) AS cart_count`
+    }
+
+    query += ` FROM products ORDER BY SIMILARITY(name, $1) DESC LIMIT $2;`
+
+    let result = await db.query(query, [value, limit])
     
     if (!result)
         return {status: 400, message: "Database error."}
@@ -143,8 +151,6 @@ module.exports.edit = async (product_id, product_data) => {
     let params = []
     for (let v = 0; v < keys.length; v++) {
         let k = keys[v]
-        if (k == "new_product_id") 
-            k = "product_id"
         params.push(`${k} = $${v + 1}`)
     }
 
@@ -154,15 +160,6 @@ module.exports.edit = async (product_id, product_data) => {
         return {status: 400, message: "Database error."}
     else if (exists.rows.length < 1)
         return {status: 403, message: "Product with that id doesn't exist."}
-
-    //Check if product with the new id exists
-    if ("new_product_id" in product_data) {
-        let exists2 = await db.query(`SELECT product_id FROM products WHERE product_id = $1;`, [product_data['new_product_id']])
-        if (!exists2)
-            return {status: 400, message: "Database error."}
-        else if (exists2.rows.length > 0)
-            return {status: 403, message: "Product with that new id already exists."}
-    }
 
     //Make the call
     values.push(product_id)

@@ -105,9 +105,42 @@ section.content {
 
             background-color: lightcoral;
             width: 80%;
-            height: 20px;
+            height: 25px;
             border-radius: 5px;
         }
+
+        .custom {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            background-color: white;
+            width: 80%;
+            height: 25px;
+            border-radius: 5px;
+            border: 2px solid black;
+        }
+
+        .admin {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            background-color: white;
+            width: 80%;
+            height: 25px;
+            border-radius: 5px;
+            border: 2px solid black;
+        }
+    }
+
+    .new_item {
+        border: 2px black;
+        border-style: dashed;
+
+        justify-content: center;
     }
 }
 

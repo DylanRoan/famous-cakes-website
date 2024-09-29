@@ -94,9 +94,6 @@ export async function PUT(req) {
 
     let product_id = body.product_id
     let product_data = {}
-    
-    if (body.new_product_id != undefined && body.new_product_id != "") 
-        product_data['new_product_id'] = body.new_product_id
 
     if (body.name != undefined && body.name != "") 
         product_data['name'] = body.name

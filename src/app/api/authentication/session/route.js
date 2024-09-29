@@ -7,7 +7,7 @@ const bcrypt = require('bcrypt')
 
 let res = NextResponse
 export async function GET(req) {
-  let session_token = cookies().get("session_token")
+  let session_token = cookies().get("session_token") //gets from headers
 
   if (session_token == undefined || session_token == "")
     return res.json({status: 403, message: "Session undefined."})
@@ -21,7 +21,7 @@ export async function GET(req) {
 
   if (new Date().getTime() - expiry_date.getTime() >= 0)
   {
-    cookies().delete("session_token")
+    cookies().delete("session_token") //may not apply, but will keep
     return res.json({status: 403, message: "Session expired."})
   }
 
