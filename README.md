@@ -11,7 +11,7 @@ Upon downloading, note that the node version used was `Node v20.14.0`. Initializ
 
 ## Tools
 This website is build on the following:
-`NextJS` <- `ReactJS` <- `NodeJS` for the framework  
+`NextJS` for the framework  
 `PostgreSQL` for the database  
 `SCSS` for styles  
 `FontAwesome` for icons  
